@@ -15,7 +15,7 @@ class DragListener internal constructor(private val listener: Listener) :
                 isDropped = true
                 var positionTarget = -1
                 val viewSource: View = event.localState as View
-                val viewId: Int = v.getId()
+                val viewId: Int = v.id
                 val flItem: Int = R.id.frame_layout_item
                 val tvEmptyListTop: Int = R.id.tvEmptyListTop
                 val tvEmptyListBottom: Int = R.id.tvEmptyListBottom
@@ -34,9 +34,9 @@ class DragListener internal constructor(private val listener: Listener) :
                             }
                         }
                         if (viewSource != null) {
-                            val source = viewSource.getParent() as RecyclerView
+                            val source = viewSource.parent as RecyclerView
                             val adapterSource = source.adapter as ListAdapter?
-                            val positionSource = viewSource.getTag() as Int
+                            val positionSource = viewSource.tag as Int
                             val sourceId = source.id
                             val list = adapterSource!!.list[positionSource]
                             val listSource = adapterSource.list
