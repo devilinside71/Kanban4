@@ -64,13 +64,11 @@ internal class ListAdapter(var list: List<String>, private val listener: Listene
             null
         }
 
-    internal inner class ListViewHolder(itemView: View?) :
+    class ListViewHolder(itemView: View?) :
         RecyclerView.ViewHolder(itemView!!) {
-        @BindView(R.id.text)
-        var text: TextView? = null
+        @BindView(R.id.text) lateinit var text: TextView
 
-        @BindView(R.id.frame_layout_item)
-        var frameLayout: FrameLayout? = null
+        @BindView(R.id.frame_layout_item) lateinit var frameLayout: FrameLayout
 
         init {
             ButterKnife.bind(this, itemView!!)
