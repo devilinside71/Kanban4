@@ -25,9 +25,9 @@ class DragListener internal constructor(private val listener: Listener) :
                     flItem, tvEmptyListTop, tvEmptyListBottom, rvTop, rvBottom -> {
                         val target: RecyclerView
                         when (viewId) {
-                            tvEmptyListTop, rvTop -> target = v.getRootView().findViewById(rvTop)
+                            tvEmptyListTop, rvTop -> target = v.rootView.findViewById(rvTop)
                             tvEmptyListBottom, rvBottom -> target =
-                                v.getRootView().findViewById(rvBottom)
+                                v.rootView.findViewById(rvBottom)
                             else -> {
                                 target = v.getParent()
                                 positionTarget = v.getTag()
