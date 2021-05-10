@@ -54,8 +54,8 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             if (source.id == recyclerView3 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView3, emptyTextView3)
                             }
-                            if (viewId == emptyTextView2) {
-                                listener.setEmptyList(View.GONE, recyclerView2, emptyTextView2)
+                            if (viewId == emptyTextView3) {
+                                listener.setEmptyList(View.GONE, recyclerView3, emptyTextView3)
                             }
                             if (source.id == recyclerView2 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView2, emptyTextView2)
