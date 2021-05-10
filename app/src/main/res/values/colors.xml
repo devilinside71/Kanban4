@@ -16,4 +16,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary2">#3F51B5</color>
+    <color name="colorPrimaryDark2">#303F9F</color>
+    <color name="colo_todo_bgr">#F88E86</color>
+    <color name="color_in_progress_bgr">#FCF299</color>
+    <color name="color_done_bgr">#9DBB7B</color>
+    <color name="color_todo_title">#F73729</color>
+    <color name="color_in_progress_title">#FFC107</color>
+    <color name="color_done_title">#5D8331</color>
 </resources>

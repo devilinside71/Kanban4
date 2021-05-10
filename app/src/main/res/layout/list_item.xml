@@ -5,14 +5,14 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_margin="5dp"
-    android:background="#00BCD4">
+    android:background="@color/grey_200">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
-        android:textStyle="bold"
         android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
         tools:text="A" />
 </FrameLayout>
