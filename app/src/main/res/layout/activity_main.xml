@@ -1,67 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/layout_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:text="Top RecyclerView" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvEmptyListTop"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="#cccccc"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="Top List is Empty!"
-        android:visibility="gone" />
+        <LinearLayout
+            android:id="@+id/layout_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+            <TextView
+                android:id="@+id/empty_list_text_view_1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#E4E4E4"
+                android:gravity="center"
+                android:text="List1 is Empty!"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#cccccc"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_todo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_in_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:text="Bottom RecyclerView" />
+            <TextView
+                android:id="@+id/empty_list_text_view_2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#E4E4E4"
+                android:gravity="center"
+                android:text="List2 is Empty!"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_in_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_done"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvEmptyListBottom"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="Bottom List is Empty!"
-        android:background="#cccccc"
-        android:visibility="gone" />
+            <TextView
+                android:id="@+id/empty_list_text_view_3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#E4E4E4"
+                android:gravity="center"
+                android:text="List2 is Empty!"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-</LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 
+
+</androidx.constraintlayout.widget.ConstraintLayout>

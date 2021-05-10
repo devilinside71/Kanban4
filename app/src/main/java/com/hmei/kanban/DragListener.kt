@@ -1,68 +1,64 @@
 package com.hmei.kanban
 
-import com.hmei.kanban.R
 import android.view.DragEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-
-class DragListener internal constructor(private val listener: Listener) :
-    View.OnDragListener {
+class DragListener internal constructor(private val listener: CustomListener) : View.OnDragListener {
     private var isDropped = false
     override fun onDrag(v: View, event: DragEvent): Boolean {
         when (event.action) {
             DragEvent.ACTION_DROP -> {
                 isDropped = true
                 var positionTarget = -1
-                val viewSource: View = event.localState as View
-                val viewId: Int = v.id
-                val flItem: Int = R.id.frame_layout_item
-                val tvEmptyListTop: Int = R.id.tvEmptyListTop
-                val tvEmptyListBottom: Int = R.id.tvEmptyListBottom
-                val rvTop: Int = R.id.rvTop
-                val rvBottom: Int = R.id.rvBottom
+                val viewSource = event.localState as View?
+                val viewId = v.id
+                val frameLayoutItem = R.id.frame_layout_item
+                val emptyTextView1 = R.id.empty_list_text_view_1
+                val emptyTextView2 = R.id.empty_list_text_view_2
+                val recyclerView1 = R.id.recycler_view_todo
+                val recyclerView2 = R.id.recycler_view_in_progress
                 when (viewId) {
-                    flItem, tvEmptyListTop, tvEmptyListBottom, rvTop, rvBottom -> {
+                    frameLayoutItem, emptyTextView1, emptyTextView2, recyclerView1, recyclerView2 -> {
                         val target: RecyclerView
                         when (viewId) {
-                            tvEmptyListTop, rvTop -> target = v.rootView.findViewById(rvTop)
-                            tvEmptyListBottom, rvBottom -> target =
-                                v.rootView.findViewById(rvBottom)
+                            emptyTextView1, recyclerView1 -> target = v.rootView.findViewById<View>(recyclerView1) as RecyclerView
+                            emptyTextView2, recyclerView2 -> target = v.rootView.findViewById<View>(recyclerView2) as RecyclerView
                             else -> {
-                                target = v.getParent()
-                                positionTarget = v.getTag()
+                                target = v.parent as RecyclerView
+                                positionTarget = v.tag as Int
                             }
                         }
                         if (viewSource != null) {
                             val source = viewSource.parent as RecyclerView
-                            val adapterSource = source.adapter as ListAdapter?
+                            val adapterSource = source.adapter as CustomAdapter?
                             val positionSource = viewSource.tag as Int
-                            val sourceId = source.id
-                            val list = adapterSource!!.list[positionSource]
-                            val listSource = adapterSource.list
-                            listSource.removeAt(positionSource)
-                            adapterSource.updateList(listSource)
-                            adapterSource.notifyDataSetChanged()
-                            val adapterTarget = target.adapter as ListAdapter?
-                            val customListTarget = adapterTarget!!.list
+                            val list: String? = adapterSource?.getList()?.get(positionSource)
+                            val listSource = adapterSource?.getList()?.apply {
+                                removeAt(positionSource)
+                            }
+                            listSource?.let { adapterSource.updateList(it) }
+                            adapterSource?.notifyDataSetChanged()
+                            val adapterTarget = target.adapter as CustomAdapter?
+                            val customListTarget = adapterTarget?.getList()
                             if (positionTarget >= 0) {
-                                customListTarget.add(positionTarget, list)
+                                list?.let { customListTarget?.add(positionTarget, it) }
                             } else {
-                                customListTarget.add(list)
+                                list?.let { customListTarget?.add(it) }
                             }
-                            adapterTarget.updateList(customListTarget)
-                            adapterTarget.notifyDataSetChanged()
-                            if (sourceId == rvBottom && adapterSource.itemCount < 1) {
-                                listener.setEmptyListBottom(true)
+                            customListTarget?.let { adapterTarget.updateList(it) }
+                            adapterTarget?.notifyDataSetChanged()
+                            if (source.id == recyclerView2 && adapterSource?.itemCount ?: 0 < 1) {
+                                listener.setEmptyList(View.VISIBLE, recyclerView2, emptyTextView2)
                             }
-                            if (viewId == tvEmptyListBottom) {
-                                listener.setEmptyListBottom(false)
+                            if (viewId == emptyTextView2) {
+                                listener.setEmptyList(View.GONE, recyclerView2, emptyTextView2)
                             }
-                            if (sourceId == rvTop && adapterSource.itemCount < 1) {
-                                listener.setEmptyListTop(true)
+                            if (source.id == recyclerView1 && adapterSource?.itemCount ?: 0 < 1) {
+                                listener.setEmptyList(View.VISIBLE, recyclerView1, emptyTextView1)
                             }
-                            if (viewId == tvEmptyListTop) {
-                                listener.setEmptyListTop(false)
+                            if (viewId == emptyTextView1) {
+                                listener.setEmptyList(View.GONE, recyclerView1, emptyTextView1)
                             }
                         }
                     }
@@ -70,7 +66,7 @@ class DragListener internal constructor(private val listener: Listener) :
             }
         }
         if (!isDropped && event.localState != null) {
-            (event.localState as View).setVisibility(View.VISIBLE)
+            (event.localState as View).visibility = View.VISIBLE
         }
         return true
     }
