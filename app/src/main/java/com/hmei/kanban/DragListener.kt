@@ -16,14 +16,17 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                 val frameLayoutItem = R.id.frame_layout_item
                 val emptyTextView1 = R.id.empty_list_text_view_1
                 val emptyTextView2 = R.id.empty_list_text_view_2
+                val emptyTextView3 = R.id.empty_list_text_view_3
                 val recyclerView1 = R.id.recycler_view_todo
                 val recyclerView2 = R.id.recycler_view_in_progress
+                val recyclerView3 = R.id.recycler_view_done
                 when (viewId) {
-                    frameLayoutItem, emptyTextView1, emptyTextView2, recyclerView1, recyclerView2 -> {
+                    frameLayoutItem, emptyTextView1, emptyTextView2, emptyTextView3, recyclerView1, recyclerView2, recyclerView3 -> {
                         val target: RecyclerView
                         when (viewId) {
                             emptyTextView1, recyclerView1 -> target = v.rootView.findViewById<View>(recyclerView1) as RecyclerView
                             emptyTextView2, recyclerView2 -> target = v.rootView.findViewById<View>(recyclerView2) as RecyclerView
+                            emptyTextView3, recyclerView3 -> target = v.rootView.findViewById<View>(recyclerView3) as RecyclerView
                             else -> {
                                 target = v.parent as RecyclerView
                                 positionTarget = v.tag as Int
@@ -48,6 +51,12 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             }
                             customListTarget?.let { adapterTarget.updateList(it) }
                             adapterTarget?.notifyDataSetChanged()
+                            if (source.id == recyclerView3 && adapterSource?.itemCount ?: 0 < 1) {
+                                listener.setEmptyList(View.VISIBLE, recyclerView3, emptyTextView3)
+                            }
+                            if (viewId == emptyTextView2) {
+                                listener.setEmptyList(View.GONE, recyclerView2, emptyTextView2)
+                            }
                             if (source.id == recyclerView2 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView2, emptyTextView2)
                             }
