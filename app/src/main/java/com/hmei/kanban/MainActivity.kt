@@ -13,25 +13,27 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
     private lateinit var binding: ActivityMainBinding
     val dummy = Dummy()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
+        dummy.setGlobalLists()
 
         //binding.recyclerViewTodo.init(listOf("A", "B", "C"), binding.emptyListTextView1)
-        var arrayListTodo = dummy.dummyListTodo()
+        var arrayListTodo = Global.todoList
         var listTodo: List<String> = emptyList()
         arrayListTodo.forEach {
             listTodo += it.description
         }
-        var arrayListInProgress = dummy.dummyListInProgress()
+        var arrayListInProgress = Global.inProgressList
         var listInProgress: List<String> = emptyList()
         arrayListInProgress.forEach {
             listInProgress += it.description
         }
-        var arrayListDone = dummy.dummyListDone()
+        var arrayListDone = Global.doneList
         var listDone: List<String> = emptyList()
         arrayListDone.forEach {
             listDone += it.description

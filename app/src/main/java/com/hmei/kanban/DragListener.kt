@@ -5,7 +5,8 @@ import android.view.DragEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class DragListener internal constructor(private val listener: CustomListener) : View.OnDragListener {
+class DragListener internal constructor(private val listener: CustomListener) :
+    View.OnDragListener {
     private var isDropped = false
     override fun onDrag(v: View, event: DragEvent): Boolean {
         when (event.action) {
@@ -25,19 +26,22 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                     frameLayoutItem, emptyTextView1, emptyTextView2, emptyTextView3, recyclerView1, recyclerView2, recyclerView3 -> {
                         val target: RecyclerView
                         when (viewId) {
-                            emptyTextView1, recyclerView1 -> target = v.rootView.findViewById<View>(recyclerView1) as RecyclerView
-                            emptyTextView2, recyclerView2 -> target = v.rootView.findViewById<View>(recyclerView2) as RecyclerView
-                            emptyTextView3, recyclerView3 -> target = v.rootView.findViewById<View>(recyclerView3) as RecyclerView
+                            emptyTextView1, recyclerView1 -> target =
+                                v.rootView.findViewById<View>(recyclerView1) as RecyclerView
+                            emptyTextView2, recyclerView2 -> target =
+                                v.rootView.findViewById<View>(recyclerView2) as RecyclerView
+                            emptyTextView3, recyclerView3 -> target =
+                                v.rootView.findViewById<View>(recyclerView3) as RecyclerView
                             else -> {
                                 target = v.parent as RecyclerView
                                 positionTarget = v.tag as Int
                             }
 
                         }
-                        Log.e("Target",target.id.toString())
-                        Log.e("Todo",recyclerView1.toString())
-                        Log.e("InProg",recyclerView2.toString())
-                        Log.e("Done",recyclerView3.toString())
+//                        Log.e("Target",target.id.toString())
+//                        Log.e("Todo",recyclerView1.toString())
+//                        Log.e("InProg",recyclerView2.toString())
+//                        Log.e("Done",recyclerView3.toString())
 
                         if (viewSource != null) {
                             val source = viewSource.parent as RecyclerView
@@ -47,10 +51,10 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             val listSource = adapterSource?.getList()?.apply {
                                 removeAt(positionSource)
                             }
-                            Log.e("Source",source.id.toString())
-                            Log.e("Todo",recyclerView1.toString())
-                            Log.e("InProg",recyclerView2.toString())
-                            Log.e("Done",recyclerView3.toString())
+//                            Log.e("Source",source.id.toString())
+//                            Log.e("Todo",recyclerView1.toString())
+//                            Log.e("InProg",recyclerView2.toString())
+//                            Log.e("Done",recyclerView3.toString())
                             listSource?.let { adapterSource.updateList(it) }
                             adapterSource?.notifyDataSetChanged()
                             val adapterTarget = target.adapter as CustomAdapter?
@@ -63,30 +67,66 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             customListTarget?.let { adapterTarget.updateList(it) }
                             adapterTarget?.notifyDataSetChanged()
 
-                            var category:String
-                            when(target.id){
-                                recyclerView1->{
-                                    Log.e("Target: ToDo",customListTarget.toString())
+                            var category: String
+                            val allEntries = ArrayList<ListItemEntity>()
+                            val todoEntries = ArrayList<ListItemEntity>()
+                            val inProgressEntries = ArrayList<ListItemEntity>()
+                            val doneEntries = ArrayList<ListItemEntity>()
+                            when (target.id) {
+                                recyclerView1 -> {
+                                    //Log.e("Target: ToDo",customListTarget.toString())
+                                    customListTarget?.forEach {
+                                        todoEntries.add(ListItemEntity(it, "todo"))
+                                    }
+                                    Global.todoList=todoEntries
                                 }
-                                recyclerView2->{
-                                    Log.e("Target: InProgress",customListTarget.toString())
+                                recyclerView2 -> {
+                                    //Log.e("Target: InProgress",customListTarget.toString())
+                                    customListTarget?.forEach {
+                                        inProgressEntries.add(ListItemEntity(it, "in_progress"))
+                                    }
+                                    Global.inProgressList=inProgressEntries
                                 }
-                                recyclerView3->{
-                                    Log.e("Target: Done",customListTarget.toString())
+                                recyclerView3 -> {
+                                    //Log.e("Target: Done", customListTarget.toString())
+                                    customListTarget?.forEach {
+                                        doneEntries.add(ListItemEntity(it, "done"))
+                                    }
+                                    Global.doneList=doneEntries
                                 }
                             }
-                            when(source.id){
-                                recyclerView1->{
-                                    Log.e("Source: ToDo",listSource.toString())
+                            when (source.id) {
+                                recyclerView1 -> {
+                                    //Log.e("Source: ToDo", listSource.toString())
+                                    listSource?.forEach {
+                                        todoEntries.add(ListItemEntity(it, "todo"))
+                                    }
+                                    Global.todoList=todoEntries
                                 }
-                                recyclerView2->{
-                                    Log.e("Source: InProgress",listSource.toString())
+                                recyclerView2 -> {
+                                    //Log.e("Source: InProgress", listSource.toString())
+                                    listSource?.forEach {
+                                        inProgressEntries.add(ListItemEntity(it, "in_progress"))
+                                    }
+                                    Global.inProgressList=inProgressEntries
                                 }
-                                recyclerView3->{
-                                    Log.e("Source: Done",listSource.toString())
+                                recyclerView3 -> {
+                                    //Log.e("Source: Done", listSource.toString())
+                                    listSource?.forEach {
+                                        doneEntries.add(ListItemEntity(it, "done"))
+                                    }
+                                    Global.doneList=doneEntries
                                 }
                             }
-
+//                            Log.e("Todo", todoEntries.toString())
+//                            Log.e("InProgress", inProgressEntries.toString())
+//                            Log.e("Done", doneEntries.toString())
+//                            Log.e("Todo", Global.todoList.toString())
+//                            Log.e("InProgress", Global.inProgressList.toString())
+//                            Log.e("Done", Global.doneList.toString())
+                            Global.fullList.clear()
+                            Global.fullList= (Global.todoList+Global.inProgressList+Global.doneList) as ArrayList<ListItemEntity>
+                            Log.e("Full", Global.fullList.toString())
                             if (source.id == recyclerView3 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView3, emptyTextView3)
                             }

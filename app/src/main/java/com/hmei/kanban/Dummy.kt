@@ -50,4 +50,13 @@ class Dummy {
         }
         return retArr
     }
+
+    fun setGlobalLists(){
+        Global.todoList=dummyListTodo()
+        Global.inProgressList=dummyListInProgress()
+        Global.doneList=dummyListDone()
+        dummyList().forEach {
+            Global.fullList.add(it)
+        }
+    }
 }
