@@ -22,16 +22,19 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layout_todo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:layout_weight="0.32"
+            android:background="@color/todoBackgroundColor"
             android:orientation="vertical">
 
 
@@ -63,7 +66,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/todoBackgroundColor"
                 android:minWidth="120dp" />
         </LinearLayout>
 
@@ -73,6 +75,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:layout_weight="0.32"
+            android:background="@color/inProgressBackgroundColor"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -105,7 +109,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/inProgressBackgroundColor"
                 android:minWidth="120dp" />
         </LinearLayout>
 
@@ -113,7 +116,10 @@
             android:id="@+id/layout_done"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:layout_weight="0.32"
+            android:background="@color/doneBackgroundColor"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -145,7 +151,7 @@
                 android:id="@+id/recycler_view_done"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/doneBackgroundColor"
+                android:layout_gravity="center_horizontal"
                 android:minWidth="120dp" />
         </LinearLayout>
     </LinearLayout>
