@@ -12,7 +12,7 @@ import com.hmei.kanban.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), CustomListener {
 
     private lateinit var binding: ActivityMainBinding
-    val dummy=Dummy()
+    val dummy = Dummy()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,20 +21,20 @@ class MainActivity : AppCompatActivity(), CustomListener {
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
         //binding.recyclerViewTodo.init(listOf("A", "B", "C"), binding.emptyListTextView1)
-        var arrayListTodo=dummy.dummyListTodo()
+        var arrayListTodo = dummy.dummyListTodo()
         var listTodo: List<String> = emptyList()
-        arrayListTodo.forEach{
-            listTodo+=it.description
+        arrayListTodo.forEach {
+            listTodo += it.description
         }
-        var arrayListInProgress=dummy.dummyListInProgress()
+        var arrayListInProgress = dummy.dummyListInProgress()
         var listInProgress: List<String> = emptyList()
-        arrayListInProgress.forEach{
-            listInProgress+=it.description
+        arrayListInProgress.forEach {
+            listInProgress += it.description
         }
-        var arrayListDone=dummy.dummyListDone()
+        var arrayListDone = dummy.dummyListDone()
         var listDone: List<String> = emptyList()
-        arrayListDone.forEach{
-            listDone+=it.description
+        arrayListDone.forEach {
+            listDone += it.description
         }
 
 
@@ -43,9 +43,31 @@ class MainActivity : AppCompatActivity(), CustomListener {
         binding.recyclerViewDone.init(listDone, binding.emptyListTextView3)
 
         fabAdd.setOnClickListener {
-            Log.e("Add","add item")
+            Log.e("Add", "add item")
             //Log.e("List", dummy.dummyString())
         }
+
+        // action bar
+        supportActionBar?.apply {
+            setTitle(R.string.app_name)
+            setSubtitle(R.string.app_subtitle)
+
+            // documentation source developer.android.com
+
+            // Set whether to include the application home affordance in the
+            // action bar. Home is presented as either an activity icon or logo.
+            setDisplayShowHomeEnabled(true)
+
+
+            // Set whether to display the activity logo rather than the
+            // activity icon. A logo is often a wider, more detailed image.
+            setDisplayUseLogoEnabled(true)
+
+
+            // Set the logo to display in the 'home' section of the action bar.
+            setLogo(R.mipmap.ic_launcher)
+        }
+
 
     }
 

@@ -26,6 +26,8 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
 
     fun updateList(list: MutableList<String>) {
         this.list = list
+        //Log.e("List",list.toString())
+        //Log.e("L",listener.toString())
     }
 
     fun getList(): MutableList<String> = this.list.toMutableList()

@@ -1,5 +1,6 @@
 package com.hmei.kanban
 
+import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,13 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                                 target = v.parent as RecyclerView
                                 positionTarget = v.tag as Int
                             }
+
                         }
+                        Log.e("Target",target.id.toString())
+                        Log.e("Todo",recyclerView1.toString())
+                        Log.e("InProg",recyclerView2.toString())
+                        Log.e("Done",recyclerView3.toString())
+
                         if (viewSource != null) {
                             val source = viewSource.parent as RecyclerView
                             val adapterSource = source.adapter as CustomAdapter?
@@ -40,6 +47,10 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             val listSource = adapterSource?.getList()?.apply {
                                 removeAt(positionSource)
                             }
+                            Log.e("Source",source.id.toString())
+                            Log.e("Todo",recyclerView1.toString())
+                            Log.e("InProg",recyclerView2.toString())
+                            Log.e("Done",recyclerView3.toString())
                             listSource?.let { adapterSource.updateList(it) }
                             adapterSource?.notifyDataSetChanged()
                             val adapterTarget = target.adapter as CustomAdapter?
@@ -51,6 +62,31 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                             }
                             customListTarget?.let { adapterTarget.updateList(it) }
                             adapterTarget?.notifyDataSetChanged()
+
+                            var category:String
+                            when(target.id){
+                                recyclerView1->{
+                                    Log.e("Target: ToDo",customListTarget.toString())
+                                }
+                                recyclerView2->{
+                                    Log.e("Target: InProgress",customListTarget.toString())
+                                }
+                                recyclerView3->{
+                                    Log.e("Target: Done",customListTarget.toString())
+                                }
+                            }
+                            when(source.id){
+                                recyclerView1->{
+                                    Log.e("Source: ToDo",listSource.toString())
+                                }
+                                recyclerView2->{
+                                    Log.e("Source: InProgress",listSource.toString())
+                                }
+                                recyclerView3->{
+                                    Log.e("Source: Done",listSource.toString())
+                                }
+                            }
+
                             if (source.id == recyclerView3 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView3, emptyTextView3)
                             }
