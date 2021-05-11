@@ -1,13 +1,16 @@
 package com.hmei.kanban
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hmei.kanban.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity(), CustomListener {
 
@@ -69,6 +72,23 @@ class MainActivity : AppCompatActivity(), CustomListener {
             // Set the logo to display in the 'home' section of the action bar.
             setLogo(R.mipmap.ic_launcher)
         }
+
+
+        // first time running
+        val isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+            .getBoolean("isFirstRun", true)
+
+        if (isFirstRun) {
+            //show sign up activity
+            startActivity(Intent(this@MainActivity, SignUpActivity::class.java))
+            Toast.makeText(this@MainActivity, "Run only once", Toast.LENGTH_LONG)
+                .show()
+            dummy.setGlobalLists()
+        }
+
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+            .putBoolean("isFirstRun", false).commit()
 
 
     }
