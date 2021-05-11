@@ -74,21 +74,6 @@ class MainActivity : AppCompatActivity(), CustomListener {
         }
 
 
-        // first time running
-        val isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-            .getBoolean("isFirstRun", true)
-
-        if (isFirstRun) {
-            //show sign up activity
-            startActivity(Intent(this@MainActivity, SignUpActivity::class.java))
-            Toast.makeText(this@MainActivity, "Run only once", Toast.LENGTH_LONG)
-                .show()
-            dummy.setGlobalLists()
-        }
-
-
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-            .putBoolean("isFirstRun", false).commit()
 
 
     }
