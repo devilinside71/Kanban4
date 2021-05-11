@@ -19,16 +19,19 @@
 
     <LinearLayout
         android:id="@+id/layout_all"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layout_todo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/colo_todo_bgr"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
             android:orientation="vertical">
 
 
@@ -47,10 +50,11 @@
                 android:id="@+id/textViewTodo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_todo_title"
+                android:background="@color/todoTitleColor"
                 android:padding="5dp"
                 android:text="@string/label_todo"
                 android:textAlignment="center"
+                android:textColor="@color/todoTitleTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -59,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/todoBackgroundColor"
                 android:minWidth="120dp" />
         </LinearLayout>
 
@@ -66,10 +71,10 @@
             android:id="@+id/layout_in_progress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/color_in_progress_bgr"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_gravity="center_horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -87,10 +92,11 @@
                 android:id="@+id/textViewInProgress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_in_progress_title"
+                android:background="@color/inProgressTitleColor"
                 android:padding="5dp"
                 android:text="@string/label_in_progress"
                 android:textAlignment="center"
+                android:textColor="@color/inProgressTitleTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -99,6 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/inProgressBackgroundColor"
                 android:minWidth="120dp" />
         </LinearLayout>
 
@@ -106,7 +113,7 @@
             android:id="@+id/layout_done"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/color_done_bgr"
+            android:layout_margin="5dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -126,10 +133,11 @@
                 android:id="@+id/textViewDone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_done_title"
+                android:background="@color/doneTitleColor"
                 android:padding="5dp"
                 android:text="@string/label_done"
                 android:textAlignment="center"
+                android:textColor="@color/doneTitleTextColor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -137,6 +145,7 @@
                 android:id="@+id/recycler_view_done"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@color/doneBackgroundColor"
                 android:minWidth="120dp" />
         </LinearLayout>
     </LinearLayout>

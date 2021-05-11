@@ -18,10 +18,26 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary2">#3F51B5</color>
     <color name="colorPrimaryDark2">#303F9F</color>
-    <color name="colo_todo_bgr">#F88E86</color>
-    <color name="color_in_progress_bgr">#FCF299</color>
-    <color name="color_done_bgr">#9DBB7B</color>
-    <color name="color_todo_title">#F73729</color>
-    <color name="color_in_progress_title">#FFC107</color>
-    <color name="color_done_title">#5D8331</color>
+    <color name="primaryColor">#2196f3</color>
+    <color name="primaryLightColor">#6ec6ff</color>
+    <color name="primaryDarkColor">#0069c0</color>
+    <color name="secondaryColor">#26c6da</color>
+    <color name="secondaryLightColor">#6ff9ff</color>
+    <color name="secondaryDarkColor">#0095a8</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="todoBackgroundColor">#ff867c</color>
+    <color name="todoTitleColor">#ef5350</color>
+    <color name="todoTitleTextColor">#000000</color>
+
+    <color name="inProgressBackgroundColor">#ffe082</color>
+    <color name="inProgressTitleColor">#ffc107</color>
+    <color name="inProgressTitleTextColor">#000000</color>
+
+    <color name="doneBackgroundColor">#c5e1a5</color>
+    <color name="doneTitleColor">#8bc34a</color>
+    <color name="doneTitleTextColor">#000000</color>
+
+
 </resources>
