@@ -1,17 +1,14 @@
 package com.hmei.kanban
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.EditText
+import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.hmei.kanban.RecyclerTouchListener.ClickListener
 import com.hmei.kanban.databinding.ActivityMainBinding
 
 
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity(), CustomListener {
         val view = binding.root
         setContentView(view)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
-
+        val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
 
         dummy.setGlobalLists()
 
@@ -64,7 +61,7 @@ class MainActivity : AppCompatActivity(), CustomListener {
             }
             tempList+="NEW TODO"
 
-            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+//            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
             val rvAdapterTodo = CustomAdapter(tempList, this)
             rvTodo.adapter = rvAdapterTodo
 
@@ -91,6 +88,22 @@ class MainActivity : AppCompatActivity(), CustomListener {
             setLogo(R.mipmap.ic_launcher)
         }
 
+
+        rvTodo.addOnItemTouchListener(
+            RecyclerTouchListener(
+                getActivity(),
+                recyclerview,
+                object : ClickListener {
+                    override fun onClick(view: View?, position: Int) {
+
+                        // Write your code here
+                    }
+
+                    override fun onLongClick(view: View?, position: Int) {
+                        // Write your code here
+                    }
+                })
+        )
 
     }
 
