@@ -25,11 +25,7 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
     override fun getItemCount(): Int = list.size
 
     fun updateList(list: MutableList<String>) {
-        list.add("Monkey")
         this.list = list
-        //Log.e("List",list.toString())
-        //Log.e("L",listener.toString())
-        //newAddeddata("Monkey")
     }
 
     fun getList(): MutableList<String> = this.list.toMutableList()
@@ -71,6 +67,8 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
         }
 
     }
+
+
 
     class CustomViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)) {

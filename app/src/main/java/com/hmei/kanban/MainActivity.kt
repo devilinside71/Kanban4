@@ -1,14 +1,23 @@
 package com.hmei.kanban
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hmei.kanban.databinding.ActivityMainBinding
 
+
+internal interface OnOK {
+    fun onTextEntered(text: String?)
+}
 
 class MainActivity : AppCompatActivity(), CustomListener {
 
@@ -21,7 +30,8 @@ class MainActivity : AppCompatActivity(), CustomListener {
         val view = binding.root
         setContentView(view)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
-        val rvTodo=findViewById<RecyclerView>(R.id.recycler_view_todo)
+
+
         dummy.setGlobalLists()
 
         //binding.recyclerViewTodo.init(listOf("A", "B", "C"), binding.emptyListTextView1)
@@ -48,7 +58,15 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
         fabAdd.setOnClickListener {
             Log.e("Add", "add item")
-            //Log.e("List", dummy.dummyString())
+            var tempList = emptyList<String>()
+            Global.todoList.forEach {
+                tempList += it.description
+            }
+            tempList+="NEW TODO"
+
+            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+            val rvAdapterTodo = CustomAdapter(tempList, this)
+            rvTodo.adapter = rvAdapterTodo
 
         }
 
@@ -74,9 +92,10 @@ class MainActivity : AppCompatActivity(), CustomListener {
         }
 
 
-
-
     }
+
+
+
 
     private fun RecyclerView.init(list: List<String>, emptyTextView: TextView) {
         this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -84,12 +103,14 @@ class MainActivity : AppCompatActivity(), CustomListener {
         this.adapter = adapter
         emptyTextView.setOnDragListener(adapter.dragInstance)
         this.setOnDragListener(adapter.dragInstance)
+
     }
 
     override fun setEmptyList(visibility: Int, recyclerView: Int, emptyTextView: Int) {
         findViewById<RecyclerView>(recyclerView).visibility = visibility
         findViewById<TextView>(emptyTextView).visibility = visibility
     }
+
 
 
 }
