@@ -39,5 +39,6 @@
     <color name="doneTitleColor">#8bc34a</color>
     <color name="doneTitleTextColor">#000000</color>
 
+    <color name="itemBackground">#eeeeee</color>
 
 </resources>

@@ -1,10 +1,8 @@
 package com.hmei.kanban
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,20 +21,21 @@ class MainActivity : AppCompatActivity(), CustomListener {
         val view = binding.root
         setContentView(view)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
+        val rvTodo=findViewById<RecyclerView>(R.id.recycler_view_todo)
         dummy.setGlobalLists()
 
         //binding.recyclerViewTodo.init(listOf("A", "B", "C"), binding.emptyListTextView1)
-        var arrayListTodo = Global.todoList
+        val arrayListTodo = Global.todoList
         var listTodo: List<String> = emptyList()
         arrayListTodo.forEach {
             listTodo += it.description
         }
-        var arrayListInProgress = Global.inProgressList
+        val arrayListInProgress = Global.inProgressList
         var listInProgress: List<String> = emptyList()
         arrayListInProgress.forEach {
             listInProgress += it.description
         }
-        var arrayListDone = Global.doneList
+        val arrayListDone = Global.doneList
         var listDone: List<String> = emptyList()
         arrayListDone.forEach {
             listDone += it.description
@@ -50,6 +49,7 @@ class MainActivity : AppCompatActivity(), CustomListener {
         fabAdd.setOnClickListener {
             Log.e("Add", "add item")
             //Log.e("List", dummy.dummyString())
+
         }
 
         // action bar
@@ -90,5 +90,7 @@ class MainActivity : AppCompatActivity(), CustomListener {
         findViewById<RecyclerView>(recyclerView).visibility = visibility
         findViewById<TextView>(emptyTextView).visibility = visibility
     }
+
+
 }
 

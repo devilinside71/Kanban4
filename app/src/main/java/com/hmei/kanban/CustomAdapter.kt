@@ -25,9 +25,11 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
     override fun getItemCount(): Int = list.size
 
     fun updateList(list: MutableList<String>) {
+        list.add("Monkey")
         this.list = list
         //Log.e("List",list.toString())
         //Log.e("L",listener.toString())
+        //newAddeddata("Monkey")
     }
 
     fun getList(): MutableList<String> = this.list.toMutableList()
@@ -57,6 +59,17 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
         holder.frameLayout?.tag = position
         holder.frameLayout?.setOnTouchListener(this)
         holder.frameLayout?.setOnDragListener(DragListener(listener!!))
+    }
+
+    fun newAddeddata(description: String?) {
+//        val newValue = NewleadsPOJO()
+//        newValue.setLeads_company(company_name)
+//        datalist.add(newValue)
+        if (description != null) {
+            getList().add(description)
+            notifyDataSetChanged()
+        }
+
     }
 
     class CustomViewHolder(inflater: LayoutInflater, parent: ViewGroup) :

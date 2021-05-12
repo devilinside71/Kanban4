@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@color/grey_200">
+    android:background="@color/itemBackground">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20dp"
+        android:layout_gravity="start"
+        android:padding="3dp"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:text="A" />
 </FrameLayout>
