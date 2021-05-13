@@ -56,13 +56,14 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
         fabAdd.setOnClickListener {
             Log.e("Add", "add item")
+            Log.e("SameList",Global.sameRecyclerView.toString())
             var tempList = emptyList<String>()
             Global.todoList.forEach {
                 tempList += it.description
             }
             tempList+="NEW TODO"
 
-            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+            //val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
             val rvAdapterTodo = CustomAdapter(tempList, this)
             rvTodo.adapter = rvAdapterTodo
 
@@ -98,13 +99,22 @@ class MainActivity : AppCompatActivity(), CustomListener {
                     override fun onClick(view: View?, position: Int) {
 
                         // Write your code here
-                        Toast.makeText(this@MainActivity, "Its onClick!", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@MainActivity, "Its onClick! $position", Toast.LENGTH_SHORT).show()
+                        Log.e("TodoList","onClick $position")
                     }
 
                     override fun onLongClick(view: View?, position: Int) {
 
                         // Write your code here
-                        Toast.makeText(this@MainActivity, "Its onLongClick!", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@MainActivity, "Its onLongClick! $position", Toast.LENGTH_SHORT).show()
+                        Log.e("TodoList","onLongClick $position")
+                    }
+
+                    override fun onDoubleTap(view: View?, position: Int) {
+
+
+                        // Write your code here
+                        Log.e("TodoList","onDoubleTap $position")
                     }
                 })
         )

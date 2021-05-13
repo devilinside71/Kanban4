@@ -19,7 +19,7 @@ class TouchListener(
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
         val child: View? = rv.findChildViewUnder(e.x, e.y)
         if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-            clickListener.onClick(child, rv.getChildPosition(child))
+            clickListener.onClick(child, rv.getChildAdapterPosition(child))
         }
         return false
     }
@@ -29,6 +29,7 @@ class TouchListener(
     interface ClickListener {
         fun onClick(view: View?, position: Int)
         fun onLongClick(view: View?, position: Int)
+        fun onDoubleTap(view: View?, position: Int)
     }
 
     init {

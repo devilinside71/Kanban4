@@ -57,7 +57,7 @@ class DragListener internal constructor(private val listener: CustomListener) :
                             }
                             customListTarget?.let { adapterTarget.updateList(it) }
                             adapterTarget?.notifyDataSetChanged()
-
+                            Global.sameRecyclerView = target.id == source.id
                             var category: String
                             val allEntries = ArrayList<ListItemEntity>()
                             val todoEntries = ArrayList<ListItemEntity>()
