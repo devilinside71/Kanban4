@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.hmei.kanban.RecyclerTouchListener.ClickListener
+import com.hmei.kanban.TouchListener.ClickListener
 import com.hmei.kanban.databinding.ActivityMainBinding
 
 
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity(), CustomListener {
             }
             tempList+="NEW TODO"
 
-//            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+            val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
             val rvAdapterTodo = CustomAdapter(tempList, this)
             rvTodo.adapter = rvAdapterTodo
 
@@ -90,17 +91,20 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
 
         rvTodo.addOnItemTouchListener(
-            RecyclerTouchListener(
-                getActivity(),
-                recyclerview,
+            TouchListener(
+                this,
+                rvTodo,
                 object : ClickListener {
                     override fun onClick(view: View?, position: Int) {
 
                         // Write your code here
+                        Toast.makeText(this@MainActivity, "Its onClick!", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onLongClick(view: View?, position: Int) {
+
                         // Write your code here
+                        Toast.makeText(this@MainActivity, "Its onLongClick!", Toast.LENGTH_SHORT).show()
                     }
                 })
         )
