@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +28,10 @@ class MainActivity : AppCompatActivity(), CustomListener {
         setContentView(view)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
         val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+        val rvInProgress = findViewById<RecyclerView>(R.id.recycler_view_in_progress)
+        val rvDone = findViewById<RecyclerView>(R.id.recycler_view_done)
+
+
 
         dummy.setGlobalLists()
 
@@ -56,14 +59,14 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
         fabAdd.setOnClickListener {
             Log.e("Add", "add item")
-            Log.e("SameList",Global.sameRecyclerView.toString())
             var tempList = emptyList<String>()
             Global.todoList.forEach {
                 tempList += it.description
             }
-            tempList+="NEW TODO"
+            tempList += "NEW TODO"
 
             //val rvTodo = findViewById<RecyclerView>(R.id.recycler_view_todo)
+
             val rvAdapterTodo = CustomAdapter(tempList, this)
             rvTodo.adapter = rvAdapterTodo
 
@@ -100,28 +103,100 @@ class MainActivity : AppCompatActivity(), CustomListener {
 
                         // Write your code here
                         //Toast.makeText(this@MainActivity, "Its onClick! $position", Toast.LENGTH_SHORT).show()
-                        Log.e("TodoList","onClick $position")
+                        //Log.e("TodoList","onClick $position")
                     }
 
                     override fun onLongClick(view: View?, position: Int) {
 
                         // Write your code here
                         //Toast.makeText(this@MainActivity, "Its onLongClick! $position", Toast.LENGTH_SHORT).show()
-                        Log.e("TodoList","onLongClick $position")
+                        Log.e("TodoList", "onLongClick $position")
+                        Log.e("SameList", Global.sameRecyclerView.toString())
+                        Log.e("SamePosition", Global.samePosition.toString())
                     }
 
                     override fun onDoubleTap(view: View?, position: Int) {
 
 
                         // Write your code here
-                        Log.e("TodoList","onDoubleTap $position")
+                        Log.e("TodoList", "onDoubleTap $position")
+                    }
+                })
+        )
+        rvInProgress.addOnItemTouchListener(
+            TouchListener(
+                this,
+                rvTodo,
+                object : ClickListener {
+                    override fun onClick(view: View?, position: Int) {
+
+                        // Write your code here
+                    }
+
+                    override fun onLongClick(view: View?, position: Int) {
+
+                        // Write your code here
+                        //Toast.makeText(this@MainActivity, "Its onLongClick! $position", Toast.LENGTH_SHORT).show()
+//                        Log.e("InProgressList","onLongClick $position")
+//                        Log.e("SameList",Global.sameRecyclerView.toString())
+//                        Log.e("SamePosition",Global.samePosition.toString())
+                        if (Global.sameRecyclerView && Global.samePosition) {
+                            Log.i("List", "InProgress EditMode ON")
+                            Log.i("Item", Global.inProgressList[position].description)
+                            Global.inProgressList[position].description="BLABLA"
+                            Log.i("ModList",Global.inProgressList.toString())
+                            var tempList = emptyList<String>()
+                            Global.inProgressList.forEach {
+                                tempList += it.description
+                            }
+                            val rvInProgressAdapter = CustomAdapter(tempList, this@MainActivity)
+//                            val rvAdapterInProgress = CustomAdapter(tempList, this)
+                            rvInProgress.adapter = rvInProgressAdapter
+                            rvInProgressAdapter.notifyDataSetChanged()
+                        } else {
+                            Log.i("List", "InProgress EditMode OFF")
+                        }
+                    }
+
+                    override fun onDoubleTap(view: View?, position: Int) {
+
+                        // Write your code here
+
+                    }
+                })
+        )
+        rvDone.addOnItemTouchListener(
+            TouchListener(
+                this,
+                rvTodo,
+                object : ClickListener {
+                    override fun onClick(view: View?, position: Int) {
+
+                        // Write your code here
+                        //Toast.makeText(this@MainActivity, "Its onClick! $position", Toast.LENGTH_SHORT).show()
+                        //Log.e("TodoList","onClick $position")
+                    }
+
+                    override fun onLongClick(view: View?, position: Int) {
+
+                        // Write your code here
+                        //Toast.makeText(this@MainActivity, "Its onLongClick! $position", Toast.LENGTH_SHORT).show()
+                        Log.e("DoneList", "onLongClick $position")
+                        Log.e("SameList", Global.sameRecyclerView.toString())
+                        Log.e("SamePosition", Global.samePosition.toString())
+                    }
+
+                    override fun onDoubleTap(view: View?, position: Int) {
+
+
+                        // Write your code here
+                        Log.e("DoneList", "onDoubleTap $position")
                     }
                 })
         )
 
+
     }
-
-
 
 
     private fun RecyclerView.init(list: List<String>, emptyTextView: TextView) {
@@ -137,7 +212,6 @@ class MainActivity : AppCompatActivity(), CustomListener {
         findViewById<RecyclerView>(recyclerView).visibility = visibility
         findViewById<TextView>(emptyTextView).visibility = visibility
     }
-
 
 
 }

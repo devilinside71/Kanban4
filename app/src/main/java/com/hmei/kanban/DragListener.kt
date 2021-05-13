@@ -58,6 +58,7 @@ class DragListener internal constructor(private val listener: CustomListener) :
                             customListTarget?.let { adapterTarget.updateList(it) }
                             adapterTarget?.notifyDataSetChanged()
                             Global.sameRecyclerView = target.id == source.id
+                            Global.samePosition=positionTarget==positionSource
                             var category: String
                             val allEntries = ArrayList<ListItemEntity>()
                             val todoEntries = ArrayList<ListItemEntity>()
@@ -106,6 +107,7 @@ class DragListener internal constructor(private val listener: CustomListener) :
                             Global.fullList.clear()
                             Global.fullList= (Global.todoList+Global.inProgressList+Global.doneList) as ArrayList<ListItemEntity>
                             Log.e("Full", Global.fullList.toString())
+
                             if (source.id == recyclerView3 && adapterSource?.itemCount ?: 0 < 1) {
                                 listener.setEmptyList(View.VISIBLE, recyclerView3, emptyTextView3)
                             }

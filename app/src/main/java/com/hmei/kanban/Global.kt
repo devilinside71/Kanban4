@@ -6,6 +6,7 @@ object Global {
     var inProgressList = ArrayList<ListItemEntity>()
     var doneList = ArrayList<ListItemEntity>()
     var sameRecyclerView = false
+    var samePosition=false
 
 }
 

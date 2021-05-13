@@ -14,7 +14,7 @@ interface CustomListener {
     fun setEmptyList(visibility: Int, recyclerView: Int, emptyTextView: Int)
 }
 
-class CustomAdapter(private var list: List<String>, private val listener: CustomListener?)
+class CustomAdapter(private var list: List<String>, private val listener: MainActivity)
     : RecyclerView.Adapter<CustomAdapter.CustomViewHolder?>(), View.OnTouchListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -41,6 +41,8 @@ class CustomAdapter(private var list: List<String>, private val listener: Custom
         }
         return false
     }
+
+
 
     val dragInstance: DragListener?
         get() = if (listener != null) {
